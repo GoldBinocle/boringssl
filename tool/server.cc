@@ -215,6 +215,9 @@ static bool HandleWWW(SSL *ssl) {
 }
 
 bool Server(const std::vector<std::string> &args) {
+#ifdef SIGPIPE
+  signal(SIGPIPE, SIG_IGN);
+#endif
   if (!InitSocketLibrary()) {
     return false;
   }
